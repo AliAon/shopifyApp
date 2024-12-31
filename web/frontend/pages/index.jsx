@@ -3,7 +3,7 @@ import { useTranslation, Trans } from "react-i18next";
 import style from "./style.module.css";
 import useCreateAccount from "../features/account/useCreateAccount";
 import { LoaderIcon } from "react-hot-toast";
-import useGetShop from "../features/shop/usegetShop";
+import useGetShop from "../features/shop/useGetShop";
 import {TitleBar} from  "@shopify/app-bridge-react"
 import { createApp } from "@shopify/app-bridge";
 import {getSessionToken} from "@shopify/app-bridge-utils"
