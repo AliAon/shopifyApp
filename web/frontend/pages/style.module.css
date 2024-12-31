@@ -1,0 +1,9 @@
+.connect_button_top{
+    margin-top: 10px;
+}
+.button_loader{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    
+}
