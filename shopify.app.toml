@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "fc224eb650734dff370cd36816975346"
-application_url = "https://employment-organisms-seeker-deny.trycloudflare.com"
+application_url = "https://resulted-intend-bk-lift.trycloudflare.com"
 embedded = true
 name = "won-app"
 handle = "won-app"
@@ -9,19 +9,20 @@ handle = "won-app"
 [build]
 automatically_update_urls_on_dev = true
 dev_store_url = "wonport.myshopify.com"
+include_config_on_deploy = true
 
 [webhooks]
 api_version = "2024-10"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_products,read_customers"
 
 [auth]
 redirect_urls = [
-  "https://employment-organisms-seeker-deny.trycloudflare.com/auth/callback",
-  "https://employment-organisms-seeker-deny.trycloudflare.com/auth/shopify/callback",
-  "https://employment-organisms-seeker-deny.trycloudflare.com/api/auth/callback"
+  "https://resulted-intend-bk-lift.trycloudflare.com/auth/callback",
+  "https://resulted-intend-bk-lift.trycloudflare.com/auth/shopify/callback",
+  "https://resulted-intend-bk-lift.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

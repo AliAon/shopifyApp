@@ -9,7 +9,7 @@ export default function useGetShop() {
     queryKey: ["shopInfo"],
     queryFn: async () => {
       const response = await getShopInfo();
-      return  response;
+      return  response.data;
     },
     refetchOnWindowFocus: false,
   });

@@ -1,63 +1,34 @@
 import { Card, Page, Layout, Text, Button } from "@shopify/polaris";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import style from "./style.module.css";
+import { TitleBar } from "@shopify/app-bridge-react";
 import useCreateAccount from "../features/account/useCreateAccount";
-import { LoaderIcon } from "react-hot-toast";
 import useGetShop from "../features/shop/useGetShop";
-import {TitleBar} from  "@shopify/app-bridge-react"
+import { LoaderIcon } from "react-hot-toast";
+import { useState } from "react";
+import useGetCurrentUser from "../features/account/useGetCurrentUser";
 import { createApp } from "@shopify/app-bridge";
-import {getSessionToken} from "@shopify/app-bridge-utils"
+import { Redirect } from "@shopify/app-bridge/actions";
+import useGetDomain from "../features/shop/useGetDomain";
 export default function HomePage() {
   const { t } = useTranslation();
-  const { createAccount, isPending, isError, error,isSuccess } = useCreateAccount();
-  const { data,isLoadingShop,refetchShopInfo}=useGetShop();
-  const shopOrigin=new URLSearchParams(window.location.search).get("host");
   const app = createApp({
-    apiKey: 'fc224eb650734dff370cd36816975346',
-    host: shopOrigin,
+    apiKey: "fc224eb650734dff370cd36816975346",
+    host: new URLSearchParams(window.location.search).get("host"),
   });
-  async function getAccessToken(shop, sessionToken) {
-    const response = await fetch('/get-access-token', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ shop, sessionToken }),
-    });
-  
-    if (!response.ok) {
-      throw new Error('Failed to get access token');
-    }
-  
-    const data = await response.json();
-    console.log('Access Token:', data.access_token);
-    return data.access_token;
-  }
-  async function fetchSessionToken(app) {
-    const token = await getSessionToken(app);
-    console.log('Session Token:', token);
-    return token;
-  }
 
+  const redirect = Redirect.create(app);  
+  const { data, isLoadingShop } = useGetShop();
+  const {dataDomain,isLoadingDomain,refetchGetDomain}=useGetDomain(data[0]?.domain)
+  const appUrl = window.location.origin;  // Get current base URL
   const handleConnect = async () => {
-    // await createAccount({
-    //   shopName: data?.shop?.name,
-    //   shopDomain: data?.shop?.primaryDomain?.host,
-    //   accessToken: "testing",
-    //   isActive: true,
-    //   userId: data?.shop?.id
-    // });
-
-    // fetchSessionToken(app).then(async (sessionToken) => {
-    //  const accessToken = await getAccessToken(shopOrigin, sessionToken);
-    //  console.log("access token",accessToken);
-    // });
-    // refetchShopInfo()
-    // console.log("data",data);
-
+    app.getState().then((state) => {
+      console.log("state", state);
+    });
+    redirect.dispatch(Redirect.Action.REMOTE,`http://localhost:3000/firstAuthFromShopify?shop=${data[0]?.domain}&email=${data[0]?.email}&appUrl=${appUrl}`)
   };
 
-
+  console.log("isLoadingDomain",isLoadingDomain)
 
   return (
     <Page narrowWidth>
@@ -70,18 +41,10 @@ export default function HomePage() {
             </Text>
             <center className={style.connect_button_top}>
               <Button primary onClick={handleConnect}>
-                <span className={style.button_loader}>
-                  {isPending && 
-                    (<LoaderIcon style={{ marginRight: "4px" }}/>)
-                   }
-                  {isSuccess ? "Connected": "Connect"}
-                </span>
+                 Connect
               </Button>
             </center>
           </Card>
-          {/* <Layout.Section>
-            <ProductsCard/>
-          </Layout.Section> */}
         </Layout.Section>
       </Layout>
     </Page>

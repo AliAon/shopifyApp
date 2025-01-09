@@ -18,6 +18,24 @@ export async function getAccount() {
   }
 }
 
+export async function getCurrentUser() {
+  try {
+    const res = await fetch(`/api/get-current-user`);
+    return await res.json();
+  } catch (error) {
+    throw handleError(error);
+  }
+}
+
+export async function getShopDomain(domain) {
+  try {
+    const res = await axiosClient.get(`/shopifyAccount/findAll?shopDomain=${domain}`);
+    return res.data;
+  } catch (error) {
+    throw handleError(error);
+  }
+}
+
 
 
 

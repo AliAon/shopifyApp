@@ -44,6 +44,8 @@ app.get("/api/products/count", async (_req, res) => {
     session: res.locals.shopify.session,
   });
 
+
+
   const countData = await client.request(`
     query shopifyProductCount {
       productsCount {
@@ -55,66 +57,53 @@ app.get("/api/products/count", async (_req, res) => {
   res.status(200).send({ count: countData.data.productsCount.count });
 });
 
-app.get("/api/shop/info", async (_req, res) => {
-  const client = new shopify.api.clients.Graphql({
-    session: res.locals.shopify.session,
-  });
 
-  const shopData = await client.request(`
-    query shopifyShopInfo {
-      shop {
-        id
-        name
-        primaryDomain {
-          host
-        }
-        accountOwner {
-          email
-          firstName
-          lastName
-          id
-          name
-        }  
-    
-     }
-    }
-  `);
-
-  res.status(200).send({ shop: shopData.data.shop });
+app.get('/api/get-access-token', async (_req, res) => {
+  res.status(200).send({ accessToken: res.locals.shopify.session.accessToken }); 
 });
 
-app.post('/get-access-token', async (_req, res) => {
-  const { shop, sessionToken } = _req.body;
-
-  if (!shop || !sessionToken) {
-    return res.status(400).send('Missing shop or session token');
-  }
-
+// GET API for Shopify Shop Information
+app.get('/api/shop', async (_req, res) => {
   try {
-    const response = await fetch(`https://${shop}/admin/oauth/access_token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        client_id: 'fc224eb650734dff370cd36816975346',
-        client_secret: 'b3266a5eb6099ee329a65c65f5e4f246',
-        code: sessionToken, // Use session token or authorization code here
-      }),
+    const session = res.locals.shopify.session;
+
+    if (!session || !session.accessToken || !session.shop) {
+      return res.status(401).json({ error: 'Shopify session is missing or invalid' });
+    }
+
+    // Fetch shop information using Shopify REST client
+    const shopData = await shopify.api.rest.Shop.all({
+      session: session,
     });
 
-    if (!response.ok) {
-      throw new Error(`Error fetching access token: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    console.log('Access Token:', data.access_token);
-    res.status(200).send(data);
+    res.status(200).json(shopData);
   } catch (error) {
-    console.error('Error fetching access token:', error);
-    res.status(500).send('Error fetching access token');
+    console.error('Error fetching shop data:', error);
+    res.status(500).json({ error: 'Failed to fetch shop information' });
   }
 });
+
+
+app.get('/api/get-current-user', async (_req, res) => {
+  try {
+    const session = res.locals.shopify.session;
+    if (!session || !session.accessToken || !session.shop) {
+      return res.status(401).json({ error: 'Shopify session is missing or invalid' });
+    }
+
+    // Fetch user information using Shopify REST client
+    const userData=await shopify.api.rest.User.all({
+      session: session,
+    })
+
+    res.status(200).json(userData);
+
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ error: 'Failed to fetch user information' });
+  }
+});
+
 
 app.post("/api/products", async (_req, res) => {
   let status = 200;

@@ -50,6 +50,12 @@ export default defineConfig({
   resolve: {
     preserveSymlinks: true,
   },
+  define: {
+   "process.env.REACT_APP_SHOPIFY_API_KEY":JSON.stringify(process.env.REACT_APP_SHOPIFY_API_KEY),
+   "process.env.REACT_APP_SHOPIFY_API_SECRET":JSON.stringify(process.env.REACT_APP_SHOPIFY_API_SECRET), 
+   "process.env.REACT_APP_WON_SITE":JSON.stringify(process.env.REACT_APP_WON_SITE),
+   "process.env.REACT_APP_SCOPES":JSON.stringify(process.env.REACT_APP_SCOPES),
+  },
   server: {
     host: "localhost",
     port: process.env.FRONTEND_PORT,
