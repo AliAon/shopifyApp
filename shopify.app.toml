@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "fc224eb650734dff370cd36816975346"
-application_url = "https://resulted-intend-bk-lift.trycloudflare.com"
+application_url = "https://hop-allow-folders-grave.trycloudflare.com"
 embedded = true
 name = "won-app"
 handle = "won-app"
@@ -14,15 +14,25 @@ include_config_on_deploy = true
 [webhooks]
 api_version = "2024-10"
 
+[[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+[[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
+  uri = "/webhooks/app/uninstalled"
+
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,read_customers"
+scopes = "write_products,write_orders,read_orders,read_customers,write_customers"
 
 [auth]
 redirect_urls = [
-  "https://resulted-intend-bk-lift.trycloudflare.com/auth/callback",
-  "https://resulted-intend-bk-lift.trycloudflare.com/auth/shopify/callback",
-  "https://resulted-intend-bk-lift.trycloudflare.com/api/auth/callback"
+  "https://hop-allow-folders-grave.trycloudflare.com/auth/callback",
+  "https://hop-allow-folders-grave.trycloudflare.com/auth/shopify/callback",
+  "https://hop-allow-folders-grave.trycloudflare.com/api/auth/callback",
+  "https://wonport-be.onrender.com/shopifyAccount/shopify"
 ]
 
 [pos]

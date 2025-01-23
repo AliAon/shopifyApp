@@ -19,7 +19,7 @@ export default function HomePage() {
 
   const redirect = Redirect.create(app);  
   const { data, isLoadingShop } = useGetShop();
-  const {dataDomain,isLoadingDomain,refetchGetDomain}=useGetDomain(data[0]?.domain)
+  // const {dataDomain,isLoadingDomain,refetchGetDomain}=useGetDomain(data[0]?.domain)
   const appUrl = window.location.origin;  // Get current base URL
   const handleConnect = async () => {
     app.getState().then((state) => {
@@ -28,7 +28,7 @@ export default function HomePage() {
     redirect.dispatch(Redirect.Action.REMOTE,`http://localhost:3000/firstAuthFromShopify?shop=${data[0]?.domain}&email=${data[0]?.email}&appUrl=${appUrl}`)
   };
 
-  console.log("isLoadingDomain",isLoadingDomain)
+  // console.log("isLoadingDomain",isLoadingDomain)
 
   return (
     <Page narrowWidth>
