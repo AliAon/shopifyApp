@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "fc224eb650734dff370cd36816975346"
-application_url = "https://hop-allow-folders-grave.trycloudflare.com"
+application_url = "https://founded-learned-cambodia-spell.trycloudflare.com"
 embedded = true
 name = "won-app"
 handle = "won-app"
@@ -15,13 +15,13 @@ include_config_on_deploy = true
 api_version = "2024-10"
 
 [[webhooks.subscriptions]]
-  topics = [ "app/scopes_update" ]
-  uri = "/webhooks/app/scopes_update"
+topics = [ "app/scopes_update" ]
+uri = "/webhooks/app/scopes_update"
 
 [[webhooks.subscriptions]]
-  topics = [ "app/uninstalled" ]
-  compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
-  uri = "/webhooks/app/uninstalled"
+topics = [ "app/uninstalled" ]
+compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
+uri = "/webhooks/app/uninstalled"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
@@ -29,10 +29,10 @@ scopes = "write_products,write_orders,read_orders,read_customers,write_customers
 
 [auth]
 redirect_urls = [
-  "https://hop-allow-folders-grave.trycloudflare.com/auth/callback",
-  "https://hop-allow-folders-grave.trycloudflare.com/auth/shopify/callback",
-  "https://hop-allow-folders-grave.trycloudflare.com/api/auth/callback",
-  "https://wonport-be.onrender.com/shopifyAccount/shopify"
+  "https://founded-learned-cambodia-spell.trycloudflare.com/auth/callback",
+  "https://founded-learned-cambodia-spell.trycloudflare.com/auth/shopify/callback",
+  "https://founded-learned-cambodia-spell.trycloudflare.com/api/auth/callback",
+  "https://wonport-be.onrender.com/shopifyAccount/callback"
 ]
 
 [pos]
