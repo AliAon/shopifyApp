@@ -1,27 +1,27 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "fc224eb650734dff370cd36816975346"
-application_url = "https://founded-learned-cambodia-spell.trycloudflare.com"
+application_url = "https://pick-shakira-usually-lauderdale.trycloudflare.com"
 embedded = true
 name = "won-app"
 handle = "won-app"
 
 [build]
 automatically_update_urls_on_dev = true
-dev_store_url = "wonport.myshopify.com"
+dev_store_url = "test-store-won.myshopify.com"
 include_config_on_deploy = true
 
 [webhooks]
 api_version = "2024-10"
 
-[[webhooks.subscriptions]]
-topics = [ "app/scopes_update" ]
-uri = "/webhooks/app/scopes_update"
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
 
-[[webhooks.subscriptions]]
-topics = [ "app/uninstalled" ]
-compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
-uri = "/webhooks/app/uninstalled"
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  compliance_topics = [ "customers/redact", "customers/data_request", "shop/redact" ]
+  uri = "/webhooks/app/uninstalled"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
@@ -29,9 +29,9 @@ scopes = "write_products,write_orders,read_orders,read_customers,write_customers
 
 [auth]
 redirect_urls = [
-  "https://founded-learned-cambodia-spell.trycloudflare.com/auth/callback",
-  "https://founded-learned-cambodia-spell.trycloudflare.com/auth/shopify/callback",
-  "https://founded-learned-cambodia-spell.trycloudflare.com/api/auth/callback",
+  "https://pick-shakira-usually-lauderdale.trycloudflare.com/auth/callback",
+  "https://pick-shakira-usually-lauderdale.trycloudflare.com/auth/shopify/callback",
+  "https://pick-shakira-usually-lauderdale.trycloudflare.com/api/auth/callback",
   "https://wonport-be.onrender.com/shopifyAccount/callback"
 ]
 
