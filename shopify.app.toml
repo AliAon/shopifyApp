@@ -1,14 +1,14 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "fc224eb650734dff370cd36816975346"
-application_url = "https://pick-shakira-usually-lauderdale.trycloudflare.com"
+application_url = "https://major-predicted-namibia-stage.trycloudflare.com"
 embedded = true
 name = "won-app"
 handle = "won-app"
 
 [build]
 automatically_update_urls_on_dev = true
-dev_store_url = "test-store-won.myshopify.com"
+dev_store_url = "dropsiping-store.myshopify.com"
 include_config_on_deploy = true
 
 [webhooks]
@@ -29,10 +29,10 @@ scopes = "write_products,write_orders,read_orders,read_customers,write_customers
 
 [auth]
 redirect_urls = [
-  "https://pick-shakira-usually-lauderdale.trycloudflare.com/auth/callback",
-  "https://pick-shakira-usually-lauderdale.trycloudflare.com/auth/shopify/callback",
-  "https://pick-shakira-usually-lauderdale.trycloudflare.com/api/auth/callback",
-  "https://wonport-be.onrender.com/shopifyAccount/callback"
+  "https://major-predicted-namibia-stage.trycloudflare.com/auth/callback",
+  "https://major-predicted-namibia-stage.trycloudflare.com/auth/shopify/callback",
+  "https://wonport-be.onrender.com/shopifyAccount/callback",
+  "https://major-predicted-namibia-stage.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
